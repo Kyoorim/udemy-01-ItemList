@@ -56,10 +56,10 @@ const ExpenseForm = (props) => {
   const submitHandler = (event) => {
     // 새로고침을 막는 방법
     event.preventDefault();
-    // 입력한 3개의 input을 묶어서 객체로 전달
+    // 입력한 3개의 input을 묶어서 저장 후 객체로 전달
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount, // + 단항 플러스: 문자열을 숫자로 바꾸는 가장 빠른 방법
       date: new Date(enteredDate),
     };
 
@@ -102,6 +102,12 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        {/*type을 button으로 정해주는
+        이유는 type이 submit이 아니라는 것을 알려주기 위해*/}
+        {/* onClick에 오는 함수는 NewExpense.js의 stopEditingHandler 함수에서 props로 내려주는 것을 받아오고 있음*/}
+        <button type="button" onClick={props.onCancel}>
+          Cancel
+        </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
